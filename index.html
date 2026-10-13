@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Font Dog — точкові шрифти</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <meta name="description" content="Інструмент для створення точкових (dot-matrix) шрифтів з експортом в OTF і WOFF2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Host+Grotesk:wght@400;500;600&family=Inter:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="top">
+      <div class="logo" role="img" aria-label="Font Dog">
+        <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 0C73.5702 0 85.3554 -6.48453e-05 92.6777 7.32227C100 14.6446 100 26.4298 100 50C100 73.5702 100 85.3554 92.6777 92.6777C85.3554 100 73.5702 100 50 100C26.4298 100 14.6446 100 7.32227 92.6777C-6.48453e-05 85.3554 0 73.5702 0 50C0 26.4298 -6.48453e-05 14.6446 7.32227 7.32227C14.6446 -6.48453e-05 26.4298 0 50 0ZM50 15C44.9007 15 40.0564 16.0909 35.6871 18.0516C33.2868 19.1288 33 22.3691 33 25C33 28.866 29.866 32 26 32C23.2196 32 19.7598 32.1532 18.5385 34.651C16.2725 39.2853 15 44.4938 15 50C15 55.0483 16.0701 59.8462 17.9945 64.1808C19.1982 66.8921 23.0335 67 26 67C29.866 67 33 70.134 33 74C33 76.9663 33.1066 80.8008 35.8177 82.0046C40.1527 83.9295 44.951 85 50 85C55.0488 85 59.8469 83.9294 64.1818 82.0044C66.8926 80.8005 67 76.9662 67 74C67 70.134 70.134 67 74 67C76.9662 67 80.8005 66.8926 82.0044 64.1818C83.9294 59.8469 85 55.0488 85 50C85 44.4932 83.7268 39.2845 81.4603 34.65C80.239 32.1527 76.78 32 74 32C70.134 32 67 28.866 67 25C67 22.3692 66.7124 19.1289 64.3122 18.0518C59.9431 16.0911 55.0991 15 50 15ZM50 63C53.866 63 57 66.134 57 70C57 73.866 53.866 77 50 77C46.134 77 43 73.866 43 70C43 66.134 46.134 63 50 63ZM30 43C33.866 43 37 46.134 37 50C37 53.866 33.866 57 30 57C26.134 57 23 53.866 23 50C23 46.134 26.134 43 30 43ZM50 43C53.866 43 57 46.134 57 50C57 53.866 53.866 57 50 57C46.134 57 43 53.866 43 50C43 46.134 46.134 43 50 43ZM70 43C73.866 43 77 46.134 77 50C77 53.866 73.866 57 70 57C66.134 57 63 53.866 63 50C63 46.134 66.134 43 70 43ZM50 23C53.866 23 57 26.134 57 30C57 33.866 53.866 37 50 37C46.134 37 43 33.866 43 30C43 26.134 46.134 23 50 23Z"/></svg>
+        <span class="logo-type" aria-hidden="true">
+          <span style="--r:1;--c:1">F</span><span style="--r:1;--c:2">O</span><span style="--r:1;--c:3">N</span>
+          <span style="--r:2;--c:2">D</span><span style="--r:2;--c:3">O</span>
+          <span class="lt-slide" style="--r:2;--c:4">T</span>
+          <span class="lt-slide" style="--r:3;--c:4">G</span>
+        </span>
+      </div>
+      <span class="top-sep" aria-hidden="true"></span>
+      <button class="brand" id="projectBtn" title="Шрифти: відкрити, перейменувати, створити новий">
+        <canvas class="wordmark" id="wordmark" aria-label="Назва шрифту"></canvas>
+        <span class="ic brand-chev" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m6 8 4 4 4-4"/></svg></span>
+      </button>
+      <div class="family" id="family" role="tablist" aria-label="Накреслення сімейства"></div>
+      <div class="top-spacer"></div>
+      <span class="save-state" id="saveState" aria-live="polite">Збережено</span>
+      <div class="icon-group">
+        <button class="icon-btn" id="undoBtn" title="Скасувати (⌘Z)" aria-label="Скасувати"><span class="ic"><svg viewBox="0 0 20 20"><path d="M7.5 5 4 8.5 7.5 12"/><path d="M4.5 8.5H12a4 4 0 0 1 0 8H9"/></svg></span></button>
+        <button class="icon-btn" id="redoBtn" title="Повторити (⇧⌘Z)" aria-label="Повторити"><span class="ic"><svg viewBox="0 0 20 20"><path d="M12.5 5 16 8.5 12.5 12"/><path d="M15.5 8.5H8a4 4 0 0 0 0 8h3"/></svg></span></button>
+      </div>
+      <button class="icon-btn" id="themeBtn" title="Світла / темна тема" aria-label="Перемкнути тему"><span class="ic"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="6.5"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" class="fill"/></svg></span></button>
+      <button class="btn primary" id="exportBtn">Експорт</button>
+    </header>
+
+    <aside class="panel glyphs-panel" aria-label="Гліфи">
+      <nav class="tabs" id="tabs" role="tablist" aria-label="Набори символів"></nav>
+      <div class="glyph-scroll" id="glyphScroll"></div>
+      <footer class="glyphs-foot">
+        <div class="progress">
+          <span id="progressText">—</span>
+          <div class="bar"><i id="progressBar"></i></div>
+        </div>
+        <div class="foot-actions">
+          <button class="btn ghost sm" id="fillMissingBtn" title="Заповнити порожні гліфи заготовками">Заповнити порожні</button>
+          <button class="btn ghost sm" id="editSetBtn">Набір символів</button>
+        </div>
+      </footer>
+    </aside>
+
+    <main class="stage">
+      <div class="editor-head" id="editorHead"></div>
+      <div class="editor-wrap">
+        <svg id="editor" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Сітка гліфа: натискайте на клітинки, щоб додати або прибрати точку"></svg>
+      </div>
+      <section class="tester" aria-label="Перевірка шрифту">
+        <div class="tester-top">
+          <textarea id="testText" rows="1" spellcheck="false" placeholder="Наберіть текст, щоб перевірити шрифт" aria-label="Текст для перевірки"></textarea>
+          <div class="tester-bar" id="testerBar"></div>
+        </div>
+        <div class="tester-view" id="testerView"><canvas id="testerCanvas"></canvas></div>
+      </section>
+    </main>
+
+    <aside class="panel controls-panel" aria-label="Налаштування">
+      <div class="scope" id="scope"></div>
+      <div class="controls-scroll" id="controls"></div>
+    </aside>
+  </div>
+
+  <div id="modalRoot"></div>
+  <div class="toast-root" id="toastRoot"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/opentype.js/1.3.4/opentype.min.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/charset.js"></script>
+  <script src="js/geometry.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/ui-kit.js"></script>
+  <script src="js/editor.js"></script>
+  <script src="js/glyphs.js"></script>
+  <script src="js/controls.js"></script>
+  <script src="js/tester.js"></script>
+  <script src="js/modals.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
